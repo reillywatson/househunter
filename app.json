@@ -1,0 +1,12 @@
+{
+  "name": "House Hunter",
+  "description": "RSS feed for Reilly to find a house",
+  "keywords": [
+    "getting-started",
+    "go",
+    "sample",
+    "example"
+  ],
+  "website": "http://github.com/reillywatson/househunter",
+  "repository": "http://github.com/reillywatson/househunter"
+}
