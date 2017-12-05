@@ -14,6 +14,4 @@ func main() {
 	}
 	http.Handle("/houses", http.HandlerFunc(getHouses))
 	http.ListenAndServe(":"+port, nil)
-
-	router.Run(":" + port)
 }
