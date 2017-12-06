@@ -5,16 +5,18 @@ import (
 	"fmt"
 	"github.com/gorilla/feeds"
 	"net/http"
+	"strings"
 	"time"
 )
 
 type houseListing struct {
-	Id           string `json:"_id"`
-	Address1     string `json:"Address1"`
-	Address2     string `json:"Address2"`
-	ContractDate string `json:"Contract Date"`
-	ListPrice    string `json:"List"`
-	MLSNumber    string `json:"MLS#"`
+	Id           string   `json:"_id"`
+	Address1     string   `json:"Address1"`
+	Address2     string   `json:"Address2"`
+	ContractDate string   `json:"Contract Date"`
+	ListPrice    string   `json:"List"`
+	MLSNumber    string   `json:"MLS#"`
+	Tags         []string `json:"Undefined"`
 	Pictures     []picture
 }
 
@@ -38,9 +40,10 @@ func getHouses(w http.ResponseWriter, _ *http.Request) {
 	for _, listing := range listings {
 		listingDate, _ := time.Parse("01/02/2006", listing.ContractDate)
 		item := &feeds.Item{
-			Title:   fmt.Sprintf("%s - %s", listing.Address1, listing.ListPrice),
-			Link:    &feeds.Link{Href: fmt.Sprintf("https://mongohouse.com/newlistings/%s", listing.Id)},
-			Created: listingDate,
+			Title:       fmt.Sprintf("%s - %s", listing.Address1, listing.ListPrice),
+			Link:        &feeds.Link{Href: fmt.Sprintf("https://mongohouse.com/newlistings/%s", listing.Id)},
+			Created:     listingDate,
+			Description: strings.Join(listing.Tags, ", "),
 		}
 		feed.Items = append(feed.Items, item)
 	}
