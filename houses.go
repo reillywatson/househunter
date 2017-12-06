@@ -24,7 +24,7 @@ type picture struct {
 }
 
 func getHouses(w http.ResponseWriter, _ *http.Request) {
-	resp, err := http.Get("https://www.mongohouse.com/api/newlistings?query=true&price_min=$0&price_max=$700,000&list_day_back=120&bedrooms=2&washrooms=1&ownershiptype=freehold&openhouse=undefined&south=43.653101797558975&west=-79.4750231366699&north=43.71008371751932&east=-79.28756891303709")
+	resp, err := http.Get("https://www.mongohouse.com/api/newlistings?query=true&price_min=$300,000&price_max=$750,000&list_day_back=120&bedrooms=2&washrooms=1&ownershiptype=freehold&openhouse=undefined&south=43.653101797558975&west=-79.4750231366699&north=43.71008371751932&east=-79.28756891303709")
 	if err != nil || resp == nil || resp.Body == nil {
 		return
 	}
