@@ -35,7 +35,7 @@ var descriptionTemplate = template.Must(template.New("desc").Parse(
 	<p>
 	{{.remarks}}
 	</p>
-	<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?&q={{.latitude}},{{.longitude}}" allowfullscreen></iframe>
+	<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key={{.maps_api_key}}&q={{.latitude}},{{.longitude}}" allowfullscreen></iframe>
 	<p/>
 	<a href="{{.mls_link}}">MLS</a>
 	`))
@@ -60,10 +60,11 @@ func getHouses(w http.ResponseWriter, _ *http.Request) {
 		mlsUrl := fmt.Sprintf("https://www.realtor.ca%s", mls.RelativeDetailsURL)
 		var buf bytes.Buffer
 		descriptionTemplate.Execute(&buf, map[string]interface{}{
-			"longitude": mls.Property.Address.Longitude,
-			"latitude":  mls.Property.Address.Latitude,
-			"remarks":   mls.PublicRemarks,
-			"mls_link":  mlsUrl,
+			"maps_api_key": mapsApiKey,
+			"longitude":    mls.Property.Address.Longitude,
+			"latitude":     mls.Property.Address.Latitude,
+			"remarks":      mls.PublicRemarks,
+			"mls_link":     mlsUrl,
 		})
 		listingDate, _ := time.Parse("01/02/2006", listing.ContractDate)
 		item := &feeds.Item{
