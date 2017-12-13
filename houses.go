@@ -40,7 +40,7 @@ var descriptionTemplate = template.Must(template.New("desc").Parse(
 	<a href="{{.mls_link}}">MLS</a>
 	<p/>
 	{{range .photos}}
-		<img src="."/>
+		<img src="{{.}}"/>
 	{{end}}
 	`))
 
