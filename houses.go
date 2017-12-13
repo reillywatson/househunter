@@ -52,7 +52,7 @@ func getHouses(w http.ResponseWriter, _ *http.Request) {
 		Title: "House listings",
 		Link:  &feeds.Link{Href: "http://mongohouse.com"},
 	}
-	for _, listing := range listings[:5] {
+	for _, listing := range listings {
 		mls, err := getMLS(listing.MLSNumber)
 		if err != nil {
 			mls = &MLSListing{PublicRemarks: err.Error()}
