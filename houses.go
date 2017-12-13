@@ -43,7 +43,7 @@ func getHouses(w http.ResponseWriter, _ *http.Request) {
 			Title:       fmt.Sprintf("%s - %s", listing.Address1, listing.ListPrice),
 			Link:        &feeds.Link{Href: fmt.Sprintf("https://mongohouse.com/newlistings/%s", listing.Id)},
 			Created:     listingDate,
-			Description: strings.Join(listing.Tags, ", ") + " +\nMLS ID: " + listing.MLSNumber,
+			Description: strings.Join(listing.Tags, ", ") + " \nMLS ID: " + listing.MLSNumber,
 		}
 		feed.Items = append(feed.Items, item)
 	}
