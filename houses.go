@@ -59,7 +59,7 @@ func getHouses(w http.ResponseWriter, _ *http.Request) {
 	for _, listing := range listings {
 		mls, err := getMLS(listing.MLSNumber)
 		if err != nil {
-			mls = &MLSListing{PublicRemarks: err.Error()}
+			continue
 		}
 		mlsUrl := fmt.Sprintf("https://www.realtor.ca%s", mls.RelativeDetailsURL)
 		var buf bytes.Buffer
